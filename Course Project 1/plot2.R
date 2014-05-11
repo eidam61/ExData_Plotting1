@@ -1,0 +1,7 @@
+hh<-read.table("household_power_consumption.txt", header = TRUE, sep = ";", na.strings = "?",)
+(hh <- hh[with(hh, hh$Date == "1/2/2007" | hh$Date == "2/2/2007"), ])
+time <- as.POSIXct(paste(hh$Date, hh$Time), format = "%d/%m/%Y %H:%M:%S")
+png("plot2.png", width = 480, height = 480)
+plot(range(time), range(hh$Global_active_power), xlab = "", ylab = "Global Active Power(kilowatts)", type="n")
+lines(time, hh$Global_active_power)
+dev.off()
